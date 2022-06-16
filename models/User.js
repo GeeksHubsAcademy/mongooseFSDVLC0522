@@ -35,32 +35,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     }
-    // followed: [
-        
-    //     {
-        
-    //     id_followed: String,
-    //     name_followed : String,
-    //     ChatName_followed: String,
-    //     }
-    // ],
-    // followers: [
-        
-    //     {
-    //     id_follower: String,
-    //     name : String,
-    //     ChatName: String,
-    //     }
-    // ],
-
-    // isAdmin: {
-    //     type: Boolean,
-    //     default: false
-    // },
-    // created: {
-    //     type: Date,
-    //     default: new Date()
-    // }
+    
 })
 
 const User = mongoose.model('User', UserSchema)

@@ -7,14 +7,21 @@ const Schema = mongoose.Schema
 
 
 const ChatSchema = new Schema({
-    arrayParticipantes: {
-        type: Array,
-        required: true
+
+    Participantes: {
+        participanteUno: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        participanteDos: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
     },
     arrayMensajes: {
         type: Array,
         required: true
-    },
+    }
     
 })
 

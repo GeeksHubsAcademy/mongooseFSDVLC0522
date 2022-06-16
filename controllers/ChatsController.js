@@ -11,6 +11,8 @@ ChatsController.getChats = async (req, res) => {
     try {
 
         await Chat.find()
+        .populate('Participantes.participanteUno')
+        .populate('Participantes.participanteDos')
             .then(data => {
                 res.send(data)
             }).catch(error => {
