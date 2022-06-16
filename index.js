@@ -9,11 +9,13 @@ const db = require('./db/db');
 
 const router = require('./router.js');
 
+const cors = require('cors');
+
 
 //Middlewares
 
 app.use(express.json());
-
+app.use(cors(corsOptions));
 app.use(router);
 
 

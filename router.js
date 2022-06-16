@@ -7,7 +7,7 @@ const UsersRouter = require('./views/UsersRouter');
 const ChatsRouter = require('./views/ChatsRouter');
 
 
-router.use('/Users', UsersRouter);
+router.use('/users', UsersRouter);
 router.use('/chats', ChatsRouter);
 
 
