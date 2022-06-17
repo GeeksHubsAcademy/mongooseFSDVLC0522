@@ -6,9 +6,14 @@ const Chat = require('../models/Chat.js');
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 
+const { validate } = require('../useful');
+
 ChatsController.getChats = async (req, res) => {
 
+
     try {
+
+
 
         await Chat.find()
         .populate('Participantes.participanteUno')

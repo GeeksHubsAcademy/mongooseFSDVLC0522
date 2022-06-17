@@ -6,9 +6,15 @@ const UsersController = {};
 const authConfig = require('../config/auth');
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
+const useful = require('../useful');
 // const jwt = require('jsonwebtoken');
 
 UsersController.getUsers = async (req, res) => {
+
+
+    if(checkError === true){
+        res.send("Ha ocurrido un error");
+    }
 
     try {
 
@@ -38,16 +44,19 @@ UsersController.addUser = async (req, res) => {
     //El password lo tenemos encriptado
     let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
 
+    let checkError = useful.validate("email",email);
   
-    if (! /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(email) ) {
-            res.send("Introduce un email válido.");
-        return;
-    };
+    if(checkError === true){
+        res.send("Ha habido un error ingresando los datos");
+    }
+    
+    let arrayCampos = [name,age,email];
 
-
-    if(name === "" || age === "" || tech === "" || hobbies === ""){
-        res.send("Los datos no han llegado correctamente");
-    }else{
+    for(let campo of arrayCampos){
+        if(campo === ""){
+            res.send("No has rellenado todos los campos");
+        }
+    }
 
         //Una vez hemos hecho la comprobación de errores, procedemos a la ejecución de la query con el ORM.
 
@@ -59,9 +68,8 @@ UsersController.addUser = async (req, res) => {
 
             }).then(usuarioEncontrado =>{
 
-                console.log(usuarioEncontrado);
-
                 if(usuarioEncontrado){
+                    
                     res.send("E-mail ya existente en la base datos.");
                 }else{
                     //Llegamos al paso final, ejecutamos la entrada de datos....
@@ -84,7 +92,7 @@ UsersController.addUser = async (req, res) => {
         } catch (error) {
             res.send(error);
         }
-    }
+    
 
 }
 
